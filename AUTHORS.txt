@@ -15,3 +15,6 @@ Contributions by
     * Mikhail Korobov <http://github.com/kmike>
     * Henrik Heimbuerger <http://github.com/hheimbuerger>
 
+Re-extended in django-flatblocks-xtd by
+
+    * Daniel Rus Morales <http://danir.us/>

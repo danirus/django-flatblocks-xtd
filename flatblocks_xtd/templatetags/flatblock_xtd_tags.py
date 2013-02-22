@@ -1,5 +1,5 @@
 """
-This module offers one templatetag called "flatblock" which allows you to
+This module offers one templatetag called "flatblock_xtd" which allows you to
 easily embed small text-snippets (like for example the help section of a page)
 into a template.
 
@@ -23,22 +23,20 @@ It accepts 2 parameter:
 
 Example::
 
-    {% load flatblock_tags %}
+    {% load flatblock_xtd_tags %}
 
     ...
 
-    {% flatblock 'contact_help' %}
-    {% flatblock name_in_variable %}
+    {% flatblock_xtd 'contact_help' %}
+    {% flatblock_xtd name_in_variable %}
 
-The 'flatblock' template tag acts like an inclusiontag and operates on the
-``flatblock/flatblock.html`` template file, which gets (besides the global
-context) also the ``flatblock`` variable passed.
+The 'flatblock_xtd' template tag acts like an inclusiontag and operates on the
+``flatblock_xtd/flatblock_xtd.html`` template file, which gets (besides the 
+global context) also the ``flatblock_xtd`` variable passed.
 
 Compared to the original implementation this includes not only the block's
-content but the whole object inclusing title, slug and id. This way you
-can easily for example offer administrative operations (like editing)
-within that template.
-
+content but the whole object including title, slug and id. This way you
+can easily offer administrative operations (like editing) within the template.
 """
 
 from django import template
@@ -46,7 +44,9 @@ from django.template import loader
 from django.db import models
 from django.core.cache import cache
 
-from flatblocks import settings
+from flatblocks_xtd import settings
+
+from inline_media.parser import inlines
 
 import logging
 
@@ -54,17 +54,17 @@ import logging
 register = template.Library()
 logger = logging.getLogger(__name__)
 
-FlatBlock = models.get_model('flatblocks', 'flatblock')
+FlatBlockXtd = models.get_model('flatblocks_xtd', 'flatblockxtd')
 
-class BasicFlatBlockWrapper(object):
+class BasicFlatBlockXtdWrapper(object):
     def prepare(self, parser, token):
         """
         The parser checks for following tag-configurations::
 
-            {% flatblock {block} %}
-            {% flatblock {block} {timeout} %}
-            {% flatblock {block} using {tpl_name} %}
-            {% flatblock {block} {timeout} using {tpl_name} %}
+            {% flatblock_xtd {block} %}
+            {% flatblock_xtd {block} {timeout} %}
+            {% flatblock_xtd {block} using {tpl_name} %}
+            {% flatblock_xtd {block} {timeout} using {tpl_name} %}
         """
         tokens = token.split_contents()
         self.is_variable = False
@@ -89,7 +89,8 @@ class BasicFlatBlockWrapper(object):
             self.cache_time = args[0]
             self.tpl_name = args[2]
         else:
-            raise template.TemplateSyntaxError, "%r tag should have between 1 and 4 arguments" % (tokens[0],)
+            raise template.TemplateSyntaxError, (
+                "%r tag should have between 1 and 4 arguments" % (tokens[0],))
         # Check to see if the slug is properly double/single quoted
         if not (self.slug[0] == self.slug[-1] and self.slug[0] in ('"', "'")):
             self.is_variable = True
@@ -97,7 +98,8 @@ class BasicFlatBlockWrapper(object):
             self.slug = self.slug[1:-1]
         # Clean up the template name
         if self.tpl_name is not None:
-            if not(self.tpl_name[0] == self.tpl_name[-1] and self.tpl_name[0] in ('"', "'")):
+            if not(self.tpl_name[0] == self.tpl_name[-1] and 
+                   self.tpl_name[0] in ('"', "'")):
                 self.tpl_is_variable = True
             else:
                 self.tpl_name = self.tpl_name[1:-1]
@@ -106,23 +108,24 @@ class BasicFlatBlockWrapper(object):
 
     def __call__(self, parser, token):
         self.prepare(parser, token)
-        return FlatBlockNode(self.slug, self.is_variable, self.cache_time,
+        return FlatBlockXtdNode(self.slug, self.is_variable, self.cache_time,
                 template_name=self.tpl_name,
                 tpl_is_variable=self.tpl_is_variable)
 
-class PlainFlatBlockWrapper(BasicFlatBlockWrapper):
+class PlainFlatBlockXtdWrapper(BasicFlatBlockXtdWrapper):
     def __call__(self, parser, token):
         self.prepare(parser, token)
-        return FlatBlockNode(self.slug, self.is_variable, self.cache_time, False)
+        return FlatBlockXtdNode(self.slug, self.is_variable, 
+                                self.cache_time, False)
 
-do_get_flatblock = BasicFlatBlockWrapper()
-do_plain_flatblock = PlainFlatBlockWrapper()
+do_get_flatblock_xtd = BasicFlatBlockXtdWrapper()
+do_plain_flatblock_xtd = PlainFlatBlockXtdWrapper()
 
-class FlatBlockNode(template.Node):
+class FlatBlockXtdNode(template.Node):
     def __init__(self, slug, is_variable, cache_time=0, with_template=True,
             template_name=None, tpl_is_variable=False):
         if template_name is None:
-            self.template_name = 'flatblocks/flatblock.html'
+            self.template_name = 'flatblocks_xtd/flatblock_xtd.html'
         else:
             if tpl_is_variable:
                 self.template_name = template.Variable(template_name)
@@ -157,22 +160,22 @@ class FlatBlockNode(template.Node):
                 # if flatblock's slug is hard-coded in template then it is
                 # safe and convenient to auto-create block if it doesn't exist.
                 # This behaviour can be configured using the
-                # FLATBLOCKS_AUTOCREATE_STATIC_BLOCKS setting
+                # FLATBLOCKS_XTD_AUTOCREATE_STATIC_BLOCKS setting
                 if self.is_variable or not settings.AUTOCREATE_STATIC_BLOCKS:
-                    flatblock = FlatBlock.objects.get(slug=real_slug)
+                    flatblock = FlatBlockXtd.objects.get(slug=real_slug)
                 else:
-                    flatblock, _ = FlatBlock.objects.get_or_create(
+                    flatblock, _ = FlatBlockXtd.objects.get_or_create(
                                       slug=real_slug,
                                       defaults = {'content': real_slug}
                                    )
                 if self.cache_time != 0:
                     if self.cache_time is None or self.cache_time == 'None':
-                        logger.debug("Caching %s for the cache's default timeout"
-                                % (real_slug,))
+                        logger.debug("Caching %s for the cache's default "
+                                     "timeout" % (real_slug,))
                         cache.set(cache_key, flatblock)
                     else:
-                        logger.debug("Caching %s for %s seconds" % (real_slug,
-                            str(self.cache_time)))
+                        logger.debug("Caching %s for %s seconds" % 
+                                     (real_slug, str(self.cache_time)))
                         cache.set(cache_key, flatblock, int(self.cache_time))
                 else:
                     logger.debug("Don't cache %s" % (real_slug,))
@@ -182,9 +185,12 @@ class FlatBlockNode(template.Node):
                 new_ctx.update({'flatblock':flatblock})
                 return tmpl.render(new_ctx)
             else:
-                return flatblock.content
-        except FlatBlock.DoesNotExist:
+                return inlines(flatblock.content)
+        except template.TemplateDoesNotExist:
+            raise template.TemplateSyntaxError(
+                "Template '%r' does not exist" % (real_template,))
+        except FlatBlockXtd.DoesNotExist:
             return ''
 
-register.tag('flatblock', do_get_flatblock)
-register.tag('plain_flatblock', do_plain_flatblock)
+register.tag('flatblock_xtd', do_get_flatblock_xtd)
+register.tag('plain_flatblock_xtd', do_plain_flatblock_xtd)

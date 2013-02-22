@@ -1,12 +1,17 @@
-{% load flatblock_tags %}<!DOCTYPE HTML>
+{% load flatblock_xtd_tags inlines %}<!DOCTYPE HTML>
 <html>
     <head>
         <meta charset="UTF-8" />
         <title>Test page for flatblock rendering</title>
+	<link rel="stylesheet" href="{{ STATIC_URL }}inline_media/css/inline_media.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}prettyphoto-3.1.3/css/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
+	<script src="{{ STATIC_URL }}prettyphoto-3.1.3/js/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}inline_media/js/inline_media.js"></script>
+	<script src="{{ STATIC_URL }}prettyphoto-3.1.3/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
-        {% flatblock 'test1' 0 %} <!-- No caching -->
-        {% flatblock 'test2' 10 %} <!-- 10s caching --> 
-        {% flatblock 'test3' None %} <!-- Default length caching -->
+        {% flatblock_xtd 'test1' 0 %} <!-- No caching -->
+        {% flatblock_xtd 'test2' 10 %} <!-- 10s caching --> 
+        {% flatblock_xtd 'test3' None %} <!-- Default length caching -->
     </body>
 </html>

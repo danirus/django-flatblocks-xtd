@@ -1,0 +1,576 @@
+[
+    {
+        "pk": 1,
+        "model": "auth.user",
+        "fields": {
+            "username": "admin",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2013-02-22T08:03:57.968",
+            "groups": [],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$vztc0RcnEM7U$b3B1v/nP0wTSz0F9wnYtoS4oDBL2muzdVAsQhTK82Hc=",
+            "email": "admin@example.com",
+            "date_joined": "2013-02-22T08:03:57.968"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "inline_media.inlinetype",
+        "fields": {
+            "content_type": 12,
+            "title": "Picture"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "inline_media.inlinetype",
+        "fields": {
+            "content_type": 13,
+            "title": "Picture Set"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "inline_media.license",
+        "fields": {
+            "link": "http://artlibre.org/licence/lal/en",
+            "name": "Free Art License"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "inline_media.license",
+        "fields": {
+            "link": "http://creativecommons.org/licenses/by/2.0/",
+            "name": "CC Attribution"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "inline_media.license",
+        "fields": {
+            "link": "http://creativecommons.org/licenses/by-nd/2.0/",
+            "name": "CC Attribution-NoDerivs"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "inline_media.license",
+        "fields": {
+            "link": "http://creativecommons.org/licenses/by-nc-nd/2.0/",
+            "name": "CC Attribution-NonCommercial-NoDerivs"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "inline_media.license",
+        "fields": {
+            "link": "http://creativecommons.org/licenses/by-nc/2.0/",
+            "name": "CC Attribution-NonCommercial"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "inline_media.license",
+        "fields": {
+            "link": "http://creativecommons.org/licenses/by-nc-sa/2.0/",
+            "name": "CC Attribution-NonCommercial-ShareAlike"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "inline_media.license",
+        "fields": {
+            "link": "http://creativecommons.org/licenses/by-sa/2.0/",
+            "name": "CC Attribution-ShareAlike"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "inline_media.pictureset",
+        "fields": {
+            "description": "A quick walk around my 2010 in photos.",
+            "show_description_inline": true,
+            "pictures": [
+                18,
+                17,
+                16,
+                15,
+                14,
+                13
+            ],
+            "title": "Quick year in photos",
+            "cover": 18,
+            "modified": "2013-02-03T00:49:18.739",
+            "slug": "quick-year-photos",
+            "created": "2012-02-16T16:37:35",
+            "show_counter": false,
+            "order": "18,14,16,17,13,15",
+            "tags": ""
+        }
+    },
+    {
+        "pk": 2,
+        "model": "inline_media.pictureset",
+        "fields": {
+            "description": "Assorted photos of the Winter 2005 in Munich",
+            "show_description_inline": true,
+            "pictures": [
+                23,
+                22,
+                21,
+                20,
+                19
+            ],
+            "title": "Assorted photos of a Winter in Munich",
+            "cover": 23,
+            "modified": "2012-02-19T19:08:55",
+            "slug": "assorted-photos-winter-munich",
+            "created": "2012-02-16T18:00:30",
+            "show_counter": false,
+            "order": "23,22,19,20,21",
+            "tags": ""
+        }
+    },
+    {
+        "pk": 23,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T17:58:29",
+            "picture": "pictures/2012/Feb/16/muc-winter-2005-05.jpg",
+            "show_license": false,
+            "description": "Skyline of Munich, from the top of the hill at the Olympia Park, 2005",
+            "license": 6,
+            "author": "Daniel Rus Morales",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:11.616",
+            "show_as_link": true,
+            "sha1": "b459fd8457f14da2d85fb0d411afe2bb21cefe4f",
+            "title": "Skyline of Munich",
+            "show_author": false,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 22,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T17:57:25",
+            "picture": "pictures/2012/Feb/16/muc-winter-2005-04.jpg",
+            "show_license": false,
+            "description": "Playing curling on the Nymphenburg channel, Munich 2005",
+            "license": 5,
+            "author": "Daniel Rus Morales",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:14.355",
+            "show_as_link": true,
+            "sha1": "48d35c0df9fa5053668e3c075746c8153e395109",
+            "title": "Curling",
+            "show_author": false,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 21,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T17:42:15",
+            "picture": "pictures/2012/Feb/16/muc-winter-2005-03.jpg",
+            "show_license": false,
+            "description": "Ski jump in the Olympia Park, Munich 2005",
+            "license": 6,
+            "author": "Daniel Rus Morales",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:15.445",
+            "show_as_link": true,
+            "sha1": "787d0cf0436753a1a0981937348d0e99c0cc6423",
+            "title": "Olympia Park",
+            "show_author": false,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 20,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T17:27:15",
+            "picture": "pictures/2012/Feb/16/muc-winter-2005-02.jpg",
+            "show_license": false,
+            "description": "Snowfall over the rooftops, Munich",
+            "license": 6,
+            "author": "Daniel Rus Morales",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:12.084",
+            "show_as_link": true,
+            "sha1": "75315db6d853070e3e6c855ac8aa50301363e061",
+            "title": "Snowfall over the rooftops",
+            "show_author": false,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 19,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T17:24:26",
+            "picture": "pictures/2012/Feb/16/muc-winter-2005-01.jpg",
+            "show_license": true,
+            "description": "Snowfall in the neighborhood of Neuhausen, Munich, January 2005",
+            "license": 6,
+            "author": "Daniel Rus Morales",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:14.693",
+            "show_as_link": true,
+            "sha1": "514b1f79fe3081fc611ba7a70b331268bc00f6f8",
+            "title": "Neuhausen, Munich",
+            "show_author": false,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 18,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T16:33:41",
+            "picture": "pictures/2012/Feb/16/for-slider-02.jpg",
+            "show_license": true,
+            "description": "Leuven, Winter of 2010, like if it was Winter of 59.",
+            "license": 6,
+            "author": "Daniel Rus Morales",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:12.413",
+            "show_as_link": true,
+            "sha1": "db9687b9baa7b46d9f49957613c6d4dd0f46f77c",
+            "title": "Leuven",
+            "show_author": true,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 17,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T16:32:54",
+            "picture": "pictures/2012/Feb/16/for-slider-05.jpg",
+            "show_license": false,
+            "description": "Playa de La Concha, San Sebasti\u00e1n, Pais Vasco, Espa\u00f1a.",
+            "license": 6,
+            "author": "Carlos Ortiz Duque",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:15.783",
+            "show_as_link": true,
+            "sha1": "548c270163507008a7dd61e2d35d2bdeb1cadd49",
+            "title": "La Concha",
+            "show_author": true,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 16,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T16:32:14",
+            "picture": "pictures/2012/Feb/16/for-slider-06.jpg",
+            "show_license": true,
+            "description": "Barcas de pesca, Puerto de Mah\u00f3n, Menorca",
+            "license": 6,
+            "author": "Daniel Rus Morales",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:16.264",
+            "show_as_link": true,
+            "sha1": "e6301098fe05a45628eb9481118166389c1ed7ef",
+            "title": "Menorca",
+            "show_author": true,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 15,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T16:31:24",
+            "picture": "pictures/2012/Feb/16/for-slider-01.jpg",
+            "show_license": true,
+            "description": "Hirsberg, near Tegernsee, Bayern, Germany.",
+            "license": 6,
+            "author": "Daniel Rus Morales",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:15.044",
+            "show_as_link": true,
+            "sha1": "fd8f64982e32f7feb68a1285b89a38f2d719e430",
+            "title": "Hirsberg",
+            "show_author": true,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 14,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T16:30:05",
+            "picture": "pictures/2012/Feb/16/for-slider-04.jpg",
+            "show_license": true,
+            "description": "Isolated house in the middle of a snow field. Salzburg, Austria.",
+            "license": 6,
+            "author": "Daniel Rus Morales",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:16.680",
+            "show_as_link": true,
+            "sha1": "0ff75202e4f58e542e2a5331f83b638a0b0e5d04",
+            "title": "Isolation",
+            "show_author": true,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 13,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T16:29:01",
+            "picture": "pictures/2012/Feb/16/for-slider-03.jpg",
+            "show_license": true,
+            "description": "Spider webs in the Austrian Alps.",
+            "license": 6,
+            "author": "Daniel Rus Morales",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:17.073",
+            "show_as_link": true,
+            "sha1": "34920e2a89558d4eaa9a9f12a048da7e26777e51",
+            "title": "Spider Webs",
+            "show_author": true,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 12,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T13:32:40",
+            "picture": "pictures/2012/Feb/16/redhat-logo.jpg",
+            "show_license": false,
+            "description": "Ready to do more today? Standardize on <a href=\"http://gb.redhat.com/products/enterprise-linux/\" target=\"_new\">Red Hat\u00ae Enterprise Linux\u00ae</a> and get more of everything you expect from an enterprise-class open source operating system with flexibility, efficiency, and control. Red Hat Enterprise Linux is your solution across a broad range of hardware architectures, hypervisors, and clouds.",
+            "license": null,
+            "author": "",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:14.082",
+            "show_as_link": true,
+            "sha1": "5294ce76f1716c11d1b870ffa4769d21cc940e0c",
+            "title": "Red Hat",
+            "show_author": false,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 11,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T13:31:35",
+            "picture": "pictures/2012/Feb/16/windows8_original_1.jpg",
+            "show_license": true,
+            "description": "Windows 8 Developer Preview is available for you to try now.",
+            "license": 7,
+            "author": "Fulanito Detal",
+            "show_description_inline": false,
+            "modified": "2013-02-03T00:04:21.768",
+            "show_as_link": true,
+            "sha1": "03d75c54274d79307346335a69de63bc7a9d8878",
+            "title": "Windows 8",
+            "show_author": true,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 10,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T13:27:13",
+            "picture": "pictures/2012/Feb/16/open-suse-logo.png",
+            "show_license": false,
+            "description": "<a href=\"http://www.opensuse.org/en/\" target=\"_new\">openSUSE</a> is a free and Linux-based operating system for your PC, Laptop or Server. You can surf the web, manage your e-mails and photos, do office work, play videos or music and have a lot of fun!",
+            "license": null,
+            "author": "",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:13.800",
+            "show_as_link": true,
+            "sha1": "8280e2c7a11b0928f44c62ba79db31b872279cac",
+            "title": "OpenSUSE",
+            "show_author": false,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 9,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T13:26:15",
+            "picture": "pictures/2012/Feb/16/slackware_logo.jpg",
+            "show_license": false,
+            "description": "The Official Release of Slackware Linux by Patrick Volkerding is an advanced Linux operating system, designed with the twin goals of ease of use and stability as top priorities. Including the latest popular software while retaining a sense of tradition, providing simplicity and ease of use alongside flexibility and power, Slackware brings the best of all worlds to the table.",
+            "license": null,
+            "author": "",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:17.428",
+            "show_as_link": true,
+            "sha1": "1c546416bd87afd8f6efdfa742fb23909a02c8cb",
+            "title": "Slackware",
+            "show_author": false,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 8,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T13:24:42",
+            "picture": "pictures/2012/Feb/16/logo-ubuntu.jpg",
+            "show_license": false,
+            "description": "Super-fast, easy to use and free, the Ubuntu operating system powers millions of desktops, netbooks and servers around the world. Ubuntu does everything you need it to. It'll work with your existing PC files, printers, cameras and MP3 players. And it comes with thousands of free apps.",
+            "license": null,
+            "author": "",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:13.525",
+            "show_as_link": true,
+            "sha1": "317a7556d2711503f97798392f9d06ce364c26fa",
+            "title": "Ubuntu",
+            "show_author": false,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 7,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T13:23:44",
+            "picture": "pictures/2012/Feb/16/mac-logo.jpg",
+            "show_license": false,
+            "description": "Built on a rock-solid UNIX foundation, OS X is engineered to take full advantage of the technologies in every new Mac. And to deliver the most intuitive and integrated computer experience.",
+            "license": null,
+            "author": "",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:17.699",
+            "show_as_link": true,
+            "sha1": "98231e7cf6d986a2b25f5f6f8125752c5d5ce97c",
+            "title": "Mac OS X",
+            "show_author": false,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 6,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T13:21:23",
+            "picture": "pictures/2012/Feb/16/debian-logo.jpg",
+            "show_license": false,
+            "description": "A free operating system (OS) for your computer. Debian uses the Linux kernel (the core of an operating system), but most of the basic OS tools come from the GNU project.",
+            "license": null,
+            "author": "",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:18.103",
+            "show_as_link": true,
+            "sha1": "7c70f2999352996bca4f4e76858c300890d6fb9e",
+            "title": "Debian GNU Linux",
+            "show_author": false,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 5,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T13:20:06",
+            "picture": "pictures/2012/Feb/16/gentoo-logo.jpg",
+            "show_license": false,
+            "description": "Gentoo Linux, a special flavor of Linux that can be automatically optimized and customized for just about any application or need.",
+            "license": null,
+            "author": "",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:18.438",
+            "show_as_link": true,
+            "sha1": "27f958f5ca179d172d6132235ff10678f9f40a9e",
+            "title": "Gentoo Linux",
+            "show_author": false,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 4,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T10:41:14",
+            "picture": "pictures/2012/Feb/16/freebsd-logo.png",
+            "show_license": false,
+            "description": "FreeBSD\u00ae is an advanced operating system for modern server, desktop, and embedded computer platforms.",
+            "license": null,
+            "author": "",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:18.786",
+            "show_as_link": true,
+            "sha1": "2d31617e0678070ac46e692b4177cc57f93e8a1b",
+            "title": "FreeBSD",
+            "show_author": false,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 3,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T10:23:43",
+            "picture": "pictures/2012/Feb/16/fedora-logo.png",
+            "show_license": false,
+            "description": "Fedora is a fast, stable, and powerful operating system for everyday use built by a worldwide community of friends",
+            "license": null,
+            "author": "Red Hat, Inc",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:19.194",
+            "show_as_link": true,
+            "sha1": "06d16e26f16287221ef45aa8ad133e09c8d8bdc3",
+            "title": "Fedora ",
+            "show_author": false,
+            "tags": ""
+        }
+    },
+    {
+        "pk": 2,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T09:14:39",
+            "picture": "pictures/2012/Feb/16/django-logo-negative.png",
+            "show_license": false,
+            "description": "<a href=\"http://www.www.djangoproject.com\" target=\"_new\">Django</a> is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.",
+            "license": null,
+            "author": "",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:13.060",
+            "show_as_link": true,
+            "sha1": "4f1b7cc48fabc8730f5e8ec633f7ecc324c5f386",
+            "title": "Django Web Framework",
+            "show_author": false,
+            "tags": "munich winter"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "inline_media.picture",
+        "fields": {
+            "uploaded": "2012-02-16T09:11:05",
+            "picture": "pictures/2012/Feb/16/python-logo-master-v3-TM.png",
+            "show_license": false,
+            "description": "<a href=\"http://www.python.org\" target=\"_new\">Python</a> is a programming language that lets you work more quickly and integrate your systems more effectively.",
+            "license": null,
+            "author": "",
+            "show_description_inline": true,
+            "modified": "2013-02-01T19:52:12.793",
+            "show_as_link": true,
+            "sha1": "c8a756475599e6e3c904b24077b4b0a31983752c",
+            "title": "Python Programming Language",
+            "show_author": false,
+            "tags": "2010"
+        }
+    }
+]

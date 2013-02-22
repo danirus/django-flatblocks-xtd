@@ -6,17 +6,17 @@ except:
     from setuptools import setup, find_packages
 
 setup(
-    name = 'django-flatblocks',
-    version = '0.6.0',
-    description = 'django-flatblocks acts like django.contrib.flatpages but '
-                  'for parts of a page; like an editable help box you want '
-                  'show alongside the main content.',
+    name = 'django-flatblocks-xtd',
+    version = '0.1a1',
+    description = 'django-flatblocks-xtd acts like django-flatblocks but '
+                  'adds support for markup content with django-markup and '
+                  'inline media content with django-inline-media.',
     long_description = open('README.rst').read(),
     keywords = 'django apps',
     license = 'New BSD License',
-    author = 'Horst Gutmann',
-    author_email = 'zerok@zerokspot.com',
-    url = 'http://github.com/zerok/django-flatblocks/',
+    author = 'Daniel Rus Morales',
+    author_email = 'mbox@danir.us',
+    url = 'http://github.com/danirus/django-flatblocks-xtd/',
     dependency_links = [],
     classifiers = [
         'Development Status :: 3 - Alpha',

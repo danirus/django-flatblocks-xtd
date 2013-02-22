@@ -10,7 +10,7 @@ except ImportError:
 sys.argv.insert(1, 'test')
 
 if len(sys.argv) == 2:
-    sys.argv.append('flatblocks')
+    sys.argv.append('flatblocks_xtd')
 
 if __name__ == "__main__":
     execute_manager(settings)
