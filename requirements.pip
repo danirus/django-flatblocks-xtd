@@ -3,8 +3,8 @@ Django
 Pillow
 beautifulsoup4
 South
+-e git+git://github.com/danirus/django-inline-media.git#egg=django-inline-media
 
 # For compat with Python 3.2/Django1.5
 -e git+git://github.com/danirus/django-tagging.git#egg=django-tagging
 -e git+git://github.com/danirus/sorl-thumbnail.git#egg=sorl-thumbnail
-

@@ -12,3 +12,4 @@ build/
 test_project/media/
 test_project/server-static/
 test_project/static/
+.emacs.desktop*
