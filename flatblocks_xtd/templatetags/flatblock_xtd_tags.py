@@ -91,8 +91,9 @@ class BasicFlatBlockXtdWrapper(object):
             self.cache_time = args[0]
             self.tpl_name = args[2]
         else:
-            raise template.TemplateSyntaxError(
-                "%r tag should have between 1 and 4 arguments" % (tokens[0],))
+            raise template.TemplateSyntaxError("{0!r} tag should have between "
+                                               "1 and 4 arguments"
+                                               "".format(tokens[0]))
         # Check to see if the slug is properly double/single quoted
         if not (self.slug[0] == self.slug[-1] and self.slug[0] in ('"', "'")):
             self.is_variable = True
@@ -189,8 +190,8 @@ class FlatBlockXtdNode(template.Node):
             else:
                 return inlines(flatblock.content)
         except template.TemplateDoesNotExist:
-            raise template.TemplateSyntaxError(
-                "Template '%r' does not exist" % (real_template,))
+            raise template.TemplateSyntaxError("Template '{0}' does not exist"
+                                               "".format(real_template))
         except FlatBlockXtd.DoesNotExist:
             return ''
 
