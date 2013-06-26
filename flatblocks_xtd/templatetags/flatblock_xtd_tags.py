@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 """
 This module offers one templatetag called "flatblock_xtd" which allows you to
 easily embed small text-snippets (like for example the help section of a page)
@@ -38,6 +39,7 @@ Compared to the original implementation this includes not only the block's
 content but the whole object including title, slug and id. This way you
 can easily offer administrative operations (like editing) within the template.
 """
+from __future__ import unicode_literals
 
 from django import template
 from django.template import loader
@@ -89,7 +91,7 @@ class BasicFlatBlockXtdWrapper(object):
             self.cache_time = args[0]
             self.tpl_name = args[2]
         else:
-            raise template.TemplateSyntaxError, (
+            raise template.TemplateSyntaxError(
                 "%r tag should have between 1 and 4 arguments" % (tokens[0],))
         # Check to see if the slug is properly double/single quoted
         if not (self.slug[0] == self.slug[-1] and self.slug[0] in ('"', "'")):

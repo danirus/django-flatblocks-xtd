@@ -1,9 +1,34 @@
+import os
+import sys
+
 try:
     from setuptools import setup, find_packages
 except:
     from ez_setup import use_setuptools
     use_setuptools()
     from setuptools import setup, find_packages
+
+from setuptools.command.test import test
+
+
+def run_tests(*args):
+    srcdir = os.path.abspath(os.path.curdir)
+    sys.path.insert(0, os.path.join(srcdir, 'test_project'))
+    if not os.environ.get("DJANGO_SETTINGS_MODULE", False):
+        os.environ["DJANGO_SETTINGS_MODULE"] = "test_project.settings"
+
+    from django.conf import settings
+    from django.test.utils import get_runner
+
+    TestRunner = get_runner(settings)
+    test_suite = TestRunner(verbosity=2, interactive=True, failfast=False)
+    errors = test_suite.run_tests(['flatblocks_xtd'])
+    if errors:
+        sys.exit(1)
+    else:
+        sys.exit(0)
+    
+test.run_tests = run_tests
 
 setup(
     name = 'django-flatblocks-xtd',
@@ -30,4 +55,5 @@ setup(
     packages = find_packages(exclude=['ez_setup', 'test_project']),
     include_package_data = True,
     zip_safe = False,
+    test_suite = "dummy",
 )

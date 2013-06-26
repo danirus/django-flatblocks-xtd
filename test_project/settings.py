@@ -29,6 +29,8 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, "static")
 
 STATIC_URL = "/static/"
 
+SECRET_KEY = 'v2824l&2-n+4zznbsk9c-ap5i)b3e8b+%*a=dxqlahm^%)68jn'
+
 TEMPLATE_LOADERS = (
     "django.template.loaders.filesystem.Loader",
     "django.template.loaders.app_directories.Loader",

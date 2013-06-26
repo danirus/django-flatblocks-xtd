@@ -9,6 +9,6 @@
 *.egg-info
 dist/
 build/
-test_project/media/cache/
+test_project/media/
 test_project/server-static/
 test_project/static/

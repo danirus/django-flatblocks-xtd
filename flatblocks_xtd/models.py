@@ -1,4 +1,8 @@
+#-*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
 
@@ -6,6 +10,7 @@ from flatblocks_xtd.settings import CACHE_PREFIX
 from inline_media.fields import TextFieldWithInlines
 
 
+@python_2_unicode_compatible
 class FlatBlockXtd(models.Model):
     """
     Think of a flatblock_xtd as a flatpage but for just part of a site. It's
@@ -22,8 +27,8 @@ class FlatBlockXtd(models.Model):
                                           "this content"))
     content = TextFieldWithInlines(_('Content'), blank=True, null=True)
 
-    def __unicode__(self):
-        return u"%s" % (self.slug,)
+    def __str__(self):
+        return "%s" % (self.slug,)
 
     def save(self, *args, **kwargs):
         super(FlatBlockXtd, self).save(*args, **kwargs)

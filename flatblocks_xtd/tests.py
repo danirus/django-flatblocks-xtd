@@ -1,3 +1,6 @@
+#-*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from django import template
 from django.test import TestCase
 from django.core.cache import cache
@@ -18,18 +21,20 @@ class BasicTests(TestCase):
              content='CONTENT'
         )
         self.admin = User.objects.create_superuser(
-            'admin', 'admin@localhost', 'adminpwd')
+            'admin2', 'admin@localhost', 'adminpwd')
 
     def testURLConf(self):
         # We have to support two different APIs here (1.1 and 1.2)
         def get_tmpl(resp):
-            if isinstance(resp.template, list):
+            if hasattr(resp, 'template') and isinstance(resp.template, list):
                 return resp.template[0]
+            elif hasattr(resp, 'templates'):
+                return resp.templates[0]
             return resp.template
-        self.assertEquals(get_tmpl(self.client.get('/edit/1/')).name, 
+        self.assertEqual(get_tmpl(self.client.get('/edit/1/')).name, 
                           'admin/login.html')
-        self.client.login(username='admin', password='adminpwd')
-        self.assertEquals(get_tmpl(self.client.get('/edit/1/')).name, 
+        self.client.login(username='admin2', password='adminpwd')
+        self.assertEqual(get_tmpl(self.client.get('/edit/1/')).name, 
                           'flatblocks_xtd/edit.html')
 
     def testCacheReset(self):
@@ -40,11 +45,11 @@ class BasicTests(TestCase):
             '{% load flatblock_xtd_tags %}{% flatblock_xtd "block" 60 %}')
         tpl.render(template.Context({}))
         name = '%sblock' % settings.CACHE_PREFIX
-        self.assertNotEquals(None, cache.get(name))
+        self.assertNotEqual(None, cache.get(name))
         block = FlatBlockXtd.objects.get(slug='block')
         block.header = 'UPDATED'
         block.save()
-        self.assertEquals(None, cache.get(name))
+        self.assertEqual(None, cache.get(name))
 
     def testSaveKwargs(self):
         block = FlatBlockXtd(slug='missing')
@@ -70,7 +75,7 @@ class TagTests(TestCase):
     def testExistingPlain(self):
         tpl = template.Template(
             '{% load flatblock_xtd_tags %}{% plain_flatblock_xtd "block" %}')
-        self.assertEqual(u'CONTENT', tpl.render(template.Context({})).strip())
+        self.assertEqual('CONTENT', tpl.render(template.Context({})).strip())
 
     def testExistingTemplate(self):
         expected = """<div class="flatblock-xtd block-block">
@@ -134,7 +139,7 @@ class AutoCreationTest(TestCase):
 
     def testNotAutocreatedMissingStaticBlock(self):
         """Tests if a missing block with hardcoded name won't be auto-created if feature is disabled"""
-        expected = u""
+        expected = ""
         settings.AUTOCREATE_STATIC_BLOCKS = False
         tpl = template.Template(
             '{% load flatblock_xtd_tags %}{% flatblock_xtd "block" %}')

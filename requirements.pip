@@ -1,6 +1,9 @@
 Django
-PIL
-BeautifulSoup<4.0.0
+Pillow
+beautifulsoup4
 South
--e svn+http://django-tagging.googlecode.com/svn/trunk/#egg=django-tagging
--e git+git://github.com/sorl/sorl-thumbnail.git#egg=sorl-thumbnail
+
+# For compat with Python 3.2/Django1.5
+-e git+git://github.com/danirus/django-tagging.git#egg=django-tagging
+-e git+git://github.com/danirus/sorl-thumbnail.git#egg=sorl-thumbnail
+
