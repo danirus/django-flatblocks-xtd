@@ -10,7 +10,7 @@ django-flatblocks-xtd is a fork of `django-flatblocks <https://github.com/zerok/
 
 Tested under:
 
-* Python 3.2 and django 1.6
-* Python 3.2 and django 1.5.5: `builds <http://buildbot.danir.us/builders/django-flatblocks-xtd-py32dj15>`_
-* Python 2.7 and django 1.5.5: `builds <http://buildbot.danir.us/builders/django-flatblocks-xtd-py27dj15>`_
-* Python 2.7 and django 1.4.10: `builds <http://buildbot.danir.us/builders/django-flatblocks-xtd-py27dj14>`_
+* Python 3.2 and django 1.6 `builds <http://buildbot.danir.us/builders/django-flatblocks-xtd-py32dj16>`_
+* Python 3.2 and django 1.5.5 `builds <http://buildbot.danir.us/builders/django-flatblocks-xtd-py32dj15>`_
+* Python 2.7 and django 1.5.5 `builds <http://buildbot.danir.us/builders/django-flatblocks-xtd-py27dj15>`_
+* Python 2.7 and django 1.4.10 `builds <http://buildbot.danir.us/builders/django-flatblocks-xtd-py27dj14>`_
