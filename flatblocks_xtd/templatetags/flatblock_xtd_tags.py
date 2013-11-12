@@ -67,6 +67,10 @@ class BasicFlatBlockXtdWrapper(object):
             {% flatblock_xtd {block} {timeout} %}
             {% flatblock_xtd {block} using {tpl_name} %}
             {% flatblock_xtd {block} {timeout} using {tpl_name} %}
+            {% flatblock_xtd {block} evaluated %}
+            {% flatblock_xtd {block} evaluated using {tpl_name} %}
+            {% flatblock_xtd {block} {timeout} evaluated %}
+            {% flatblock_xtd {block} {timeout} evaluated using {tpl_name} %}
         """
         tokens = token.split_contents()
         self.is_variable = False
@@ -74,6 +78,7 @@ class BasicFlatBlockXtdWrapper(object):
         self.slug = None
         self.cache_time = 0
         self.tpl_name = None
+        self.evaluated = False
         tag_name, self.slug, args = tokens[0], tokens[1], tokens[2:]
         num_args = len(args)
         if num_args == 0:
@@ -81,19 +86,40 @@ class BasicFlatBlockXtdWrapper(object):
             pass
         elif num_args == 1:
             # block and timeout
-            self.cache_time = args[0]
-            pass
+            if args[0] == 'evaluated':
+                self.evaluated = True
+            else:
+                self.cache_time = args[0]
         elif num_args == 2:
-            # block, "using", tpl_name
-            self.tpl_name = args[1]
+            if args[0] != 'using':
+                # block, timeout, "evaluated"
+                if args[1] != 'evaluated':
+                    raise template.TemplateSyntaxError("{0!r} tag with two "
+                                                       "arguments has to "
+                                                       "include the cache "
+                                                       "timeout and the "
+                                                       "evaluated flag".format(
+                                                           tag_name))
+                self.cache_time = args[0]
+                self.evaluated = True
+            else:
+                # block, "using", tpl_name
+                self.tpl_name = args[1]
         elif num_args == 3:
-            # block, timeout, "using", tpl_name
-            self.cache_time = args[0]
+            # block, timeout|"evaluated", "using", tpl_name
+            if args[0] == 'evaluated':
+                self.evaluated = True
+            else:
+                self.cache_time = args[0]
             self.tpl_name = args[2]
+        elif num_args == 4:
+            self.cache_time = args[0]
+            self.evaluated = True
+            self.tpl_name = args[3]            
         else:
             raise template.TemplateSyntaxError("{0!r} tag should have between "
-                                               "1 and 4 arguments"
-                                               "".format(tokens[0]))
+                                               "1 and 5 arguments".format(
+                                                   tokens[0]))
         # Check to see if the slug is properly double/single quoted
         if not (self.slug[0] == self.slug[-1] and self.slug[0] in ('"', "'")):
             self.is_variable = True
@@ -112,21 +138,22 @@ class BasicFlatBlockXtdWrapper(object):
     def __call__(self, parser, token):
         self.prepare(parser, token)
         return FlatBlockXtdNode(self.slug, self.is_variable, self.cache_time,
-                template_name=self.tpl_name,
-                tpl_is_variable=self.tpl_is_variable)
+                                template_name=self.tpl_name,
+                                tpl_is_variable=self.tpl_is_variable,
+                                evaluated=self.evaluated)
 
 class PlainFlatBlockXtdWrapper(BasicFlatBlockXtdWrapper):
     def __call__(self, parser, token):
         self.prepare(parser, token)
-        return FlatBlockXtdNode(self.slug, self.is_variable, 
-                                self.cache_time, False)
+        return FlatBlockXtdNode(self.slug, self.is_variable, self.cache_time, 
+                                False, evaluated=self.evaluated)
 
 do_get_flatblock_xtd = BasicFlatBlockXtdWrapper()
 do_plain_flatblock_xtd = PlainFlatBlockXtdWrapper()
 
 class FlatBlockXtdNode(template.Node):
     def __init__(self, slug, is_variable, cache_time=0, with_template=True,
-            template_name=None, tpl_is_variable=False):
+            template_name=None, tpl_is_variable=False, evaluated=False):
         if template_name is None:
             self.template_name = 'flatblocks_xtd/flatblock_xtd.html'
         else:
@@ -138,6 +165,7 @@ class FlatBlockXtdNode(template.Node):
         self.is_variable = is_variable
         self.cache_time = cache_time
         self.with_template = with_template
+        self.evaluated = evaluated
 
     def render(self, context):
         if self.is_variable:
@@ -183,6 +211,12 @@ class FlatBlockXtdNode(template.Node):
                 else:
                     logger.debug("Don't cache %s" % (real_slug,))
 
+            if self.evaluated:
+                flatblock.raw_content = flatblock.content
+                flatblock.raw_header = flatblock.header
+                flatblock.content = self._evaluate(flatblock.content, context)
+                flatblock.header = self._evaluate(flatblock.header, context)
+
             if self.with_template:
                 tmpl = loader.get_template(real_template)
                 new_ctx.update({'flatblock':flatblock})
@@ -194,6 +228,9 @@ class FlatBlockXtdNode(template.Node):
                                                "".format(real_template))
         except FlatBlockXtd.DoesNotExist:
             return ''
+
+    def _evaluate(self, content, context):
+        return template.Template(content).render(context)
 
 register.tag('flatblock_xtd', do_get_flatblock_xtd)
 register.tag('plain_flatblock_xtd', do_plain_flatblock_xtd)
