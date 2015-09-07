@@ -32,7 +32,7 @@ test.run_tests = run_tests
 
 setup(
     name = 'django-flatblocks-xtd',
-    version = '0.1a1',
+    version = '0.2',
     description = 'django-flatblocks-xtd acts like django-flatblocks but '
                   'adds support for markup content with django-markup and '
                   'inline media content with django-inline-media.',
